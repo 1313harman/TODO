@@ -1,1 +1,2 @@
-# TODO
+# TODO Application
+I developed a TODO application using React, leveraging useState, useEffect, useContext, and localStorage for state and data management. This project includes features such as user authentication, adding tasks, deleting tasks, and editing existing tasks. By utilizing the Context API, I efficiently managed global state across the application. The entire application is styled using Tailwind CSS for a modern and responsive design. I have prepared the Dashboard, which shows all tasks together in one place.
