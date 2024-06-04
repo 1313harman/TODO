@@ -20,6 +20,11 @@ function Home() {
     }
   }, []);
 
+  useEffect(() => {
+    setCount(todos.filter(todo => todo.completed).length); // Update count when todos change
+  }, [todos]);
+
+
   const handleButtonClick = (button) => {
     setActiveButton(button);
   };
@@ -71,22 +76,22 @@ function Home() {
             <div className="flex justify-between mb-4">
               <div>
                 <button
-                  className={`text-white py-2 px-4 rounded hover:bg-green-400 hover:text-black hover:font-semibold ${activeButton === 'upcoming' ? 'bg-green-400 text-black font-semibold' : ''}`}
+                  className={`text-white py-2 px-4 rounded hover:bg-green-400 hover:text-black hover:font-semibold ${activeButton === 'upcoming' ? 'bg-blue-600 text-black font-semibold' : ''}`}
                   onClick={() => handleButtonClick('upcoming')}
                 >
                   Upcoming
                 </button>
                 <button
-                  className={`text-white py-2 px-4 rounded hover:bg-green-400 hover:text-black hover:font-semibold ${activeButton === 'overdue' ? 'bg-green-400 text-black font-semibold' : ''}`}
+                  className={`text-white py-2 px-4 rounded hover:bg-green-400 hover:text-black hover:font-semibold ${activeButton === 'overdue' ? 'bg-blue-600 text-black font-semibold' : ''}`}
                   onClick={() => handleButtonClick('overdue')}
                 >
                   Overdue
                 </button>
                 <button
-                  className={`text-white py-2 px-4 rounded hover:bg-green-400 hover:text-black hover:font-semibold ${activeButton === 'completed' ? 'bg-green-400 text-black font-semibold' : ''}`}
+                  className={`text-white py-2 px-4 rounded hover:bg-green-400 hover:text-black hover:font-semibold ${activeButton === 'completed' ? 'bg-blue-600 text-black font-semibold' : ''}`}
                   onClick={() => handleButtonClick('completed')}
                 >
-                  Completed
+                  Completed <span className="ml-2 bg-red-600 font-semibold rounded-full px-1 py-0.5">{count}</span>
                 </button>
               </div>
               <button className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-500">Create task</button>
@@ -105,6 +110,38 @@ function Home() {
             {activeButton === 'overdue' && (
               <div className="bg-gray-800 rounded p-2 mb-2"> 
 
+              </div>
+            )}
+            {/* activeButton === 'completed' && (
+              <div>
+                <div className="bg-gray-800 rounded p-2 mb-2">
+                  {(() => {
+                    const completedTodos = [];
+                    let i = 0;
+                    while (i < todos.length) {
+                      if (todos[i].completed) {
+                        completedTodos.push(todos[i]);
+                      }
+                      i++;
+                    }
+                    return completedTodos.map((todo) => (
+                      <div key={todo.id} className="w-full">
+                        <TodoItem todo={todo} />
+                      </div> 
+                    )
+                  )}
+                  <div/>
+                <div/>
+              <div/>  ****Unoptimize approach for complete section */}
+            {activeButton === 'completed' && (
+              <div>
+                <div className="bg-gray-800 rounded p-2 mb-2">
+                  {todos.filter(todo=>todo.completed).map((todo)=>
+                    <div key={todo.id} className="w-full">
+                      <TodoItem todo={todo}/>
+                    </div>
+                  )}
+                </div>
               </div>
             )}
           </div>
