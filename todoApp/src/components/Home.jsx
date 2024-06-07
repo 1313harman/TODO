@@ -18,7 +18,7 @@ function Home() {
     if (savedTodos && savedTodos.length > 0) {
       setTodos(savedTodos);
     }
-  }, []);
+  }, []);  
 
   useEffect(() => {
     setCount(todos.filter(todo => todo.completed).length); // Update count when todos change
@@ -99,7 +99,7 @@ function Home() {
             {activeButton === 'upcoming' && (
               <div className="">
                 <ul className="bg-gray-800 rounded p-2 mb-2">
-                  {todos.map((todo) => (
+                  {todos.filter(todo =>  !todo.completed).map((todo) => (
                     <div key={todo.id} className="w-full">
                       <TodoItem todo={todo} />
                     </div>
